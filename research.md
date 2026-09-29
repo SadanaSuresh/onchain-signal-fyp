@@ -61,9 +61,44 @@ finding a "signal" that is really just noise. The approach going forward:
 - Test only a small, pre-defined set of signals
 - Use walk-forward validation rather than in-sample testing
 
+## 2026-09-29 — Aim, Objectives and Scope finalised
+
+**Aim:** develop a web dashboard for traders that surfaces on-chain signals
+(exchange inflows/outflows, whale wallet transfers, stablecoin flows, DEX
+liquidity activity) across Bitcoin and Ethereum, to evaluate whether these
+signals provide predictive value for price movement and volatility beyond
+what is visible from market data alone.
+
+**Objectives (7, SMART, covering all 14 original research questions):**
+
+1. Build a data pipeline pulling raw on-chain data (Dune) and market data
+   (CCXT) for BTC/ETH, at least 3 months historical plus live feed. (Q1, Q10)
+2. Collect and process the 4 signal types (exchange flows, whale transfers
+   refined by entity/transfer-type labels, stablecoin flows, DEX liquidity)
+   using Dune, Arkham and DefiLlama. (Q2-Q8)
+3. Build anomaly detection using rolling z-scores per wallet/token, rather
+   than a fixed threshold. (Q9)
+4. Test whether each signal adds predictive information beyond market data
+   alone, using Granger causality and regression (p < 0.05). (Q11)
+5. Measure lead-lag relationships via return autocorrelation across 5min,
+   30min, 4hr and 24hr windows. (Q12)
+6. Build a composite score combining all 4 signals and compare its accuracy
+   against each individual signal. (Q13)
+7. Apply walk-forward validation across objectives 4-6 to guard against
+   overfitting and multiple-testing bias. (Q14)
+
+**Scope:**
+- Included: everything in objectives 1-7, delivered as a web dashboard
+- Excluded: cryptocurrencies beyond Bitcoin and Ethereum, live/real-money
+  trading, a mobile app (web only), and any on-chain signals beyond the 4
+  chosen types
+
 ## Next steps
 
-- Finalise Project Proposal scope and SMART objectives
-- Begin drafting the methodology and tools sections against the PP rubric
+- Write the Background Review (real literature and existing systems, properly
+  cited)
+- Draft the Methodology and Tools & Technologies sections against the PP
+  rubric
+- Build the Time Schedule (Gantt chart) with dates for all 7 objectives
 - Start building the data collection pipeline (Dune + CCXT) once the proposal
   scope is confirmed
