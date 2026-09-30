@@ -241,6 +241,24 @@ charting functionality Streamlit provides natively.
 **Version control/documentation:** Git + GitHub, specifically requested by
 the supervisor for tracking progress via README.md and research.md.
 
+**Why this specific combination, not just each tool in isolation:** the
+stack is deliberately structured in two layers rather than picked
+tool-by-tool. The data-collection layer (Dune, Arkham, DefiLlama, The
+Graph, CCXT) was chosen entirely on one criterion, free access to real
+raw or indexed data with no infrastructure to self-host, because Georgy's
+own tool-mapping confirmed this combination alone covers the large
+majority of the 14 research questions. The analysis layer (pandas,
+SQLite, statsmodels, scipy) was chosen on a different criterion,
+minimising integration overhead, by staying inside one language (Python)
+end to end so the pipeline built in Objective 1 feeds directly into the
+statistical testing in Objectives 4-7 without a format-conversion step
+between them. Streamlit sits on top of both layers rather than being
+picked independently: it needs to read directly from the same
+pandas/SQLite objects the analysis layer already produces, which is why
+Flask (requiring a separate templating/serialization step to display the
+same data) was rejected specifically for this project's shape, not on
+general merit.
+
 ## 2026-09-30 — Methodology
 
 **Development methodology: Agile (iterative, solo-adapted).**
@@ -273,11 +291,42 @@ project, not full Scrum with defined roles and ceremonies.
   signal types with statistical validation, which became this project's
   central requirement
 
+**Analytical methods and success metrics (per objective):** the dev
+methodology (Agile) governs how the project is built; these are the actual
+technical methods and the specific pass/fail metric each one is judged
+against, so "success" is defined in advance rather than decided after
+seeing the results, which is itself a safeguard against the overfitting
+risk raised in Objective 7.
+
+| Objective | Method | Metric for success |
+|---|---|---|
+| 3 (anomaly detection) | Rolling z-score per wallet/token, not a fixed global threshold | Flags transfers >2 standard deviations from that wallet/token's own recent rolling mean |
+| 4 (beyond-market-data test) | Granger causality + regression, on-chain signal vs price/volatility | Statistically significant at p < 0.05; a signal that fails this is reported as a negative result, not discarded |
+| 5 (lead-lag) | Return autocorrelation across 5min/30min/4hr/24hr windows | The window with the strongest, earliest significant autocorrelation is reported as the effective lead time |
+| 6 (composite score) | Weighted combination of the 4 signals, one score per asset per window | Combined score's predictive accuracy compared directly against each individual signal from Objective 4, same p < 0.05 threshold |
+| 7 (walk-forward validation) | Sequential train/test split (e.g. train months 1-2, test month 3, roll forward) | A relationship only counts as confirmed if it holds on the out-of-sample window, not just in-sample |
+
 **Original contribution:** integrating four independently-studied on-chain
 signal types into one statistically validated system, a combination not
 attempted in any reviewed literature or existing platform, tested under
 walk-forward validation to guard against the overfitting risk identified
-as the field's primary failure mode.
+as the field's primary failure mode. The technical difficulty is not any
+single method in isolation (each of the five methods above is individually
+standard), it is applying all of them consistently across four
+independently-sourced, differently-shaped signal types for two assets
+without letting the analysis quietly overfit, which is exactly the failure
+mode Bailey et al. (2016) and Georgy both identified as the field's biggest
+risk.
+
+**Why Agile specifically fits this technical shape:** each objective in
+the table above is a self-contained pass/fail test. If Objective 3
+(anomaly detection) turns out noisy or Objective 6 (composite scoring)
+doesn't beat the individual signals, that objective can be simplified,
+reported as a negative finding, or dropped without stalling the others,
+because they don't depend on each other succeeding. A Waterfall plan fixed
+in advance would force committing to a composite-scoring design before
+knowing whether any individual signal even works, which is the specific
+risk Agile's incremental structure avoids here.
 
 ## 2026-09-30 — Ethics, Legal, Social, EDI and Sustainability
 
@@ -288,7 +337,7 @@ as the field's primary failure mode.
 | Social/financial harm | Dashboard's prediction flags could be misread as guaranteed trading advice | Mandatory disclaimer (academic purpose only); display confidence ranges, not binary buy/sell signals |
 | EDI | Stablecoins are disproportionately used by people in unstable economies as a survival tool, not speculation (~90% of Venezuela's Binance P2P volume is USDT) | Keep framing analytical/academic, not "get rich" marketing language |
 | Sustainability | No new blockchain computation/mining created, only querying existing data | Avoid redundant/repeated API queries to minimize load on free-tier infrastructure |
-| Systemic risk (beyond individual harm) | If signal-based tools like this become widely adopted, coordinated reaction to the same on-chain events could amplify volatility rather than reduce information asymmetry | Acknowledged explicitly as a scaling limitation, not directly tested within this project's scope |
+| Systemic risk (beyond individual harm) | If signal-based tools like this become widely adopted, coordinated reaction to the same on-chain events could amplify volatility rather than reduce information asymmetry | Acknowledged as a scaling limitation beyond this project's scope to test, but not left unaddressed: the dashboard will display confidence ranges and historical hit-rate rather than an instant real-time alert, deliberately introducing a short interpretation delay before a user can act, which reduces the chance of many users reacting to the identical signal in the same instant |
 | Legal boundary (GDPR) | Wallet addresses are pseudonymous, not directly tied to verified identity by this project, so likely outside GDPR's personal data definition; however entity clustering makes this boundary not absolute | Will not attempt independent deanonymization beyond labels already public through Arkham |
 
 **SDG engagement:** SDG 10 (Reduced Inequalities) is the primary, directly-tied
