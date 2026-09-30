@@ -249,10 +249,47 @@ attempted in any reviewed literature or existing platform, tested under
 walk-forward validation to guard against the overfitting risk identified
 as the field's primary failure mode.
 
+## 2026-09-30 — Ethics, Legal, Social, EDI and Sustainability
+
+| Area | Issue specific to this project | Safeguard |
+|---|---|---|
+| Legal | Each data source (Dune, Arkham, DefiLlama, CCXT) has its own free-tier ToS | Strict compliance per API: no scraping beyond limits, no reselling data, no exceeding rate limits |
+| Privacy | Blockchain wallets are pseudonymous, but entity clustering (Objective 2) can link them to real identities | Only use identity labels already public via Arkham; never attempt independent deanonymization |
+| Social/financial harm | Dashboard's prediction flags could be misread as guaranteed trading advice | Mandatory disclaimer (academic purpose only); display confidence ranges, not binary buy/sell signals |
+| EDI | Stablecoins are disproportionately used by people in unstable economies as a survival tool, not speculation (~90% of Venezuela's Binance P2P volume is USDT) | Keep framing analytical/academic, not "get rich" marketing language |
+| Sustainability | No new blockchain computation/mining created, only querying existing data | Avoid redundant/repeated API queries to minimize load on free-tier infrastructure |
+| Systemic risk (beyond individual harm) | If signal-based tools like this become widely adopted, coordinated reaction to the same on-chain events could amplify volatility rather than reduce information asymmetry | Acknowledged explicitly as a scaling limitation, not directly tested within this project's scope |
+| Legal boundary (GDPR) | Wallet addresses are pseudonymous, not directly tied to verified identity by this project, so likely outside GDPR's personal data definition; however entity clustering makes this boundary not absolute | Will not attempt independent deanonymization beyond labels already public through Arkham |
+
+**SDG engagement:** SDG 10 (Reduced Inequalities) is the primary, directly-tied
+SDG. Existing institutional-grade on-chain analytics tools are priced for
+institutions (Nansen ~$99-499/month, Chainalysis an estimated
+$50,000-200,000/year). This project deliberately uses only free-tier data
+sources to build equivalent analytical capability, directly addressing the
+information gap between institutional and retail market participants
+identified in the Background Review.
+
+## 2026-09-30 — Time Schedule
+
+Full plan spans the whole FYP (not just the PP), aligned to the real module
+timeline, with personal target dates set roughly 2 weeks ahead of each
+official deadline as a deliberate risk-management buffer:
+
+| Phase | My target | Official deadline | Main task | Key sub-tasks | Risk + mitigation |
+|---|---|---|---|---|---|
+| 1. PP finalization | 20 Oct 2026 | 2 Nov 2026 | Complete and rehearse PP | Finish remaining slides, assemble deck, rehearse Q&A | 2-week buffer for rehearsal and unexpected issues |
+| 2. Data pipeline (Obj 1) | 20 Nov 2026 | Feeds SRS, 4 Dec 2026 | Build data collection pipeline | Dune API setup, CCXT integration, SQLite schema, 3-month historical backfill | API/rate limit issues → start with shorter historical window, expand once confirmed working |
+| 3. Signal collection + anomaly detection (Obj 2, 3) | 8 Jan 2027 | First code demo, 22 Jan 2027 | Collect 4 signal types, build anomaly detection | Exchange flows first, then whale/entity refinement, stablecoin flows, DEX liquidity, rolling z-score | Entity clustering more complex than expected → build simplest signal first, add refinements incrementally |
+| 4. Statistical testing + dashboard MVP (Obj 4, 5) | 21 Jan 2027 | IPD, 4 Feb 2027 | Granger causality, lead-lag testing, dashboard MVP | Implement statsmodels tests, build first dashboard view | No significant result found → still a valid research finding, reframe rather than treat as failure |
+| 5. Composite scoring + validation (Obj 6, 7) | 10 Mar 2027 | — | Build composite score, apply walk-forward validation | Equal-weighted scoring first, then optimize, rolling train/test splits | Backtesting computational time → start simple before optimizing |
+| 6. Full dashboard + report | 8 Apr 2027 | Final Report/Software/Video, 22 Apr 2027 | Finalize dashboard, write report, record demo | Polish UI, write methodology/results, edit video | Report-writing time crunch → draft sections as each objective completes |
+| 7. Viva prep | 20 Apr 2027 | Viva, 29 Apr-14 May 2027 | Rehearse full project defense | Mock Q&A on all 7 objectives and findings | — |
+
+The consistent ~2-week buffer across every phase is itself the stated risk
+management strategy for the Time Schedule slide.
+
 ## Next steps
 
-- Draft Ethics, legal, social, EDI and sustainability considerations (10%)
-- Build the Time Schedule (Gantt chart) with dates for all 7 objectives
 - Format the reference list in Harvard style
-- Start building the data collection pipeline (Dune + CCXT) once the proposal
-  scope is confirmed
+- Assemble all content into actual slides
+- Start building the data collection pipeline (Dune + CCXT)
