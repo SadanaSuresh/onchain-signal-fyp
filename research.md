@@ -401,8 +401,9 @@ predict Bitcoin cycles', Research in International Business and Finance,
 
 Kang, C., Lee, C., Ko, K., Woo, J. and Hong, J.W.K. (2020)
 'De-anonymization of the Bitcoin network using address clustering', in
-Blockchain and Trustworthy Systems: Second International Conference,
-BlockSys 2020. Singapore: Springer.
+Zheng, Z., Dai, H.N., Fu, X. and Chen, B. (eds.) Blockchain and
+Trustworthy Systems: BlockSys 2020, Communications in Computer and
+Information Science, vol. 1267. Singapore: Springer, pp. 489-501.
 
 Urumov, G. and Chountas, P. (2022) 'Clustering stock price volatility
 using intuitionistic fuzzy sets', Notes on Intuitionistic Fuzzy Sets,
@@ -413,13 +414,15 @@ Zhu, B., Liu, D., Wan, X., Liao, G., Moallemi, C. and Bachu, B. (2026)
 Uniswap protocol', in Financial Cryptography and Data Security: FC 2025
 International Workshops. Cham: Springer.
 
-Verification update (30 Sept 2026): Bailey et al. confirmed as a working
-paper, not a journal article — the source document (dated Feb 2016) has no
-journal or conference listed anywhere in it, so the citation above is
-correctly formatted as [Working paper]. One item still open: Kang et al.'s
-exact page numbers within the BlockSys 2020 proceedings could not be
-confirmed via search; needs a 30-second manual check against the Springer
-page before final submission, then add ", pp. XX-XX" to that entry.
+Verification update (30 Sept 2026): both flags now closed. Bailey et al.
+confirmed as a working paper, not a journal article — the source document
+(dated Feb 2016) has no journal or conference listed anywhere in it, so
+the citation above is correctly formatted as [Working paper]. Kang et al.
+confirmed via the Springer chapter page directly: pp. 489-501, in
+Communications in Computer and Information Science vol. 1267, edited by
+Zheng, Dai, Fu and Chen, published 12 November 2020, DOI
+10.1007/978-981-15-9213-3_38. Reference list above updated accordingly.
+All 8 references are now fully verified with no outstanding flags.
 
 ## Next steps
 
