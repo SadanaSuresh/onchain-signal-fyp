@@ -61,7 +61,24 @@ finding a "signal" that is really just noise. The approach going forward:
 - Test only a small, pre-defined set of signals
 - Use walk-forward validation rather than in-sample testing
 
-## 2026-09-29 — Aim, Objectives and Scope finalised
+## 2026-09-29 — Problem Statement, Aim, Objectives and Scope finalised
+
+**Problem statement:** Traders who rely only on price charts and market
+data miss a category of information that exists before the price actually
+moves: on-chain activity. A large amount of crypto moving from a wallet to
+an exchange is usually a sign that a sale is coming, but chart-only traders
+don't see this happening on the blockchain. By the time the price actually
+drops and they notice, the move has already started, so they miss out on
+profit or take a bigger loss than if they had seen the signal early. This
+isn't a hypothetical gap: institutional analytics platforms (Nansen,
+Glassnode, Chainalysis) already sell this exact type of on-chain visibility
+to well-funded desks, at prices from roughly $99/month to an estimated
+$50,000-200,000/year (see Background Review), which confirms the
+information itself is valuable and already in active use, just not
+accessible to a trader without that budget. This project investigates
+whether on-chain signals carry information about price and volatility that
+isn't already reflected in market data, and whether a free-tier tool can
+give an individual trader that same early visibility.
 
 **Aim:** develop a web dashboard for traders that surfaces on-chain signals
 (exchange inflows/outflows, whale wallet transfers, stablecoin flows, DEX
@@ -69,23 +86,26 @@ liquidity activity) across Bitcoin and Ethereum, to evaluate whether these
 signals provide predictive value for price movement and volatility beyond
 what is visible from market data alone.
 
-**Objectives (7, SMART, covering all 14 original research questions):**
+**Objectives (7, SMART, covering all 14 original research questions;
+target dates taken from the Time Schedule below):**
 
-1. Build a data pipeline pulling raw on-chain data (Dune) and market data
-   (CCXT) for BTC/ETH, at least 3 months of historical plus live feed. (Q1, Q10)
-2. Collect and process the 4 signal types (exchange flows, whale transfers
-   refined by entity/transfer-type labels, stablecoin flows, DEX liquidity)
-   using Dune, Arkham and DefiLlama. (Q2-Q8)
-3. Build anomaly detection using rolling z-scores per wallet/token, rather
-   than a fixed threshold. (Q9)
-4. Test whether each signal adds predictive information beyond market data
-   alone, using Granger causality and regression (p < 0.05). (Q11)
-5. Measure lead-lag relationships via return autocorrelation across 5min,
-   30min, 4hr and 24hr windows. (Q12)
-6. Build a composite score combining all 4 signals and compare its accuracy
-   against each individual signal. (Q13)
-7. Apply walk-forward validation across objectives 4-6 to guard against
-   overfitting and multiple-testing bias. (Q14)
+1. By 20 Nov 2026, build a data pipeline pulling raw on-chain data (Dune)
+   and market data (CCXT) for BTC/ETH, at least 3 months of historical plus
+   live feed. (Q1, Q10)
+2. By 8 Jan 2027, collect and process the 4 signal types (exchange flows,
+   whale transfers refined by entity/transfer-type labels, stablecoin
+   flows, DEX liquidity) using Dune, Arkham and DefiLlama. (Q2-Q8)
+3. By 8 Jan 2027, build anomaly detection using rolling z-scores per
+   wallet/token, rather than a fixed threshold. (Q9)
+4. By 21 Jan 2027, test whether each signal adds predictive information
+   beyond market data alone, using Granger causality and regression
+   (p < 0.05). (Q11)
+5. By 21 Jan 2027, measure lead-lag relationships via return
+   autocorrelation across 5min, 30min, 4hr and 24hr windows. (Q12)
+6. By 10 Mar 2027, build a composite score combining all 4 signals and
+   compare its accuracy against each individual signal. (Q13)
+7. By 10 Mar 2027, apply walk-forward validation across objectives 4-6 to
+   guard against overfitting and multiple-testing bias. (Q14)
 
 **Scope:**
 - Included: everything in objectives 1-7, delivered as a web dashboard
@@ -125,11 +145,15 @@ publisher/arXiv/Springer pages, not taken on trust):
 study tests one on-chain signal type against price using its own
 methodology and time window, with no single study combining exchange
 flows, whale activity, stablecoin flows and DEX liquidity into one
-evaluated system. Bailey et al. (2016) show that testing multiple signals
-without proper validation risks false discoveries, a risk this literature
-does not consistently address. This project closes that gap by testing all
-four signal types together under walk-forward validation, presented
-through one dashboard.
+evaluated system. Chalkiadakis et al. (2022) test statistical causality
+between on-chain sentiment and price using a single-signal framework, and
+Zhu et al. (2026) study what drives DEX liquidity on Uniswap in isolation
+from other on-chain signal types; both reinforce the single-signal pattern
+this project is built to move past. Bailey et al. (2016) show that testing
+multiple signals without proper validation risks false discoveries, a risk
+this literature does not consistently address. This project closes that
+gap by testing all four signal types together under walk-forward
+validation, presented through one dashboard.
 
 **Cross-source synthesis:** these sources do not fully agree with each
 other. Grobys et al. (2026) report strong backtested outperformance from
@@ -152,7 +176,13 @@ surface on-chain data but none statistically test whether it predicts
 price, and none combine multiple signal types into one evaluated output.
 This project's contribution isn't new data collection (same free-tier
 sources), it's the testing and integration layer these platforms don't
-provide.
+provide. Kang et al. (2020) show that address clustering can
+de-anonymize a meaningful share of Bitcoin wallets using heuristics similar
+to the entity clustering Arkham exposes, which both confirms the technical
+feasibility of the whale-tracking approach in Objective 2 and is exactly
+why Objective 2 and the Ethics section below restrict this project to
+labels Arkham already makes public, rather than attempting independent
+clustering.
 
 **Background stats (industry context):** global crypto market cap over
 $3.9 trillion (Aug 2025), daily trading volume approximately $144 billion,
@@ -334,10 +364,13 @@ Zhu, B., Liu, D., Wan, X., Liao, G., Moallemi, C. and Bachu, B. (2026)
 Uniswap protocol', in Financial Cryptography and Data Security: FC 2025
 International Workshops. Cham: Springer.
 
-Two items flagged for a 30-second manual check before final submission:
-Bailey et al. journal/venue not fully confirmed (may be a working paper
-rather than a journal article), Kang et al. exact page numbers not
-confirmed from the source page.
+Verification update (30 Sept 2026): Bailey et al. confirmed as a working
+paper, not a journal article — the source document (dated Feb 2016) has no
+journal or conference listed anywhere in it, so the citation above is
+correctly formatted as [Working paper]. One item still open: Kang et al.'s
+exact page numbers within the BlockSys 2020 proceedings could not be
+confirmed via search; needs a 30-second manual check against the Springer
+page before final submission, then add ", pp. XX-XX" to that entry.
 
 ## Next steps
 
