@@ -1,14 +1,14 @@
 # Research Log
 
-This file tracks the research and scoping decisions behind the project, so the
-supervisor can follow progress without needing a separate update each time.
+This log is to help me track the research and scoping decisions for the project, and to also
+tell the supervisor to follow the progress.
 
 ---
 
 ## 2026-09-29 — Data source scoping
 
 Reviewed the free/freemium data landscape for each of the 14 research questions,
-based on supervisor's mapping. Summary of what was checked and confirmed:
+based on the supervisor's mapping. Summary of what was checked and confirmed:
 
 - **Dune Analytics / Flipside Crypto** — free SQL access to raw Ethereum, Bitcoin
   and Solana chain data. Covers custom queries on transfers, DEX flows and
@@ -21,7 +21,7 @@ based on supervisor's mapping. Summary of what was checked and confirmed:
   migration data (Q7, Q8).
 - **Glassnode / CryptoQuant** — limited free tiers, cover exchange inflow/outflow
   at a basic level (Q2, Q6); full granularity is paywalled.
-- **Coinglass** — free, open interest / funding rates / liquidations, useful
+- **Coinglass** — free, open interest/funding rates/liquidations, useful
   derivatives context (Q11).
 - **Whale Alert** — free tier flags large transfers with basic labels, but no
   historical data on the free tier (Q3).
@@ -35,9 +35,9 @@ based on supervisor's mapping. Summary of what was checked and confirmed:
   used alongside the on-chain sources for comparison (Q1, Q11).
 
 **Confirmed stack:** Dune + Arkham + DefiLlama + Coinglass + CCXT covers the
-large majority of the data needed for the 14 questions without cost. The
+a large majority of the data needed for the 14 questions, at no cost. The
 remaining gap is real-time anomaly detection (Q9) and large-scale entity
-clustering (Q5), which are only available at usable depth through paid tools
+clustering (Q5), which is only available at usable depth through paid tools
 (Nansen, Chainalysis) and will instead be approached as a DIY build on top of
 the free data.
 
@@ -47,13 +47,13 @@ The following are not solved by any data source directly and require building
 the analysis: anomaly detection against dynamic thresholds (Q9), testing whether
 on-chain data adds information beyond market data via statistical methods such
 as Granger causality (Q11), measuring lead-lag relationships between on-chain
-events and price at different time windows (Q12), and combining multiple
+events and prices at different time windows (Q12), and combining multiple
 signals into a composite score (Q13).
 
 ## Methodology note: overfitting and multiple testing (Q14)
 
 Flagged by the supervisor as the biggest risk in this kind of research, since
-testing many possible on-chain variables against price increases the chance of
+Testing many possible on-chain variables against price increases the chance of
 finding a "signal" that is really just noise. The approach going forward:
 
 - Form hypotheses first, using questions 2 to 8 as priors, rather than testing
@@ -72,7 +72,7 @@ what is visible from market data alone.
 **Objectives (7, SMART, covering all 14 original research questions):**
 
 1. Build a data pipeline pulling raw on-chain data (Dune) and market data
-   (CCXT) for BTC/ETH, at least 3 months historical plus live feed. (Q1, Q10)
+   (CCXT) for BTC/ETH, at least 3 months of historical plus live feed. (Q1, Q10)
 2. Collect and process the 4 signal types (exchange flows, whale transfers
    refined by entity/transfer-type labels, stablecoin flows, DEX liquidity)
    using Dune, Arkham and DefiLlama. (Q2-Q8)
