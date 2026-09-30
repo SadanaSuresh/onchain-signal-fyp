@@ -293,3 +293,53 @@ management strategy for the Time Schedule slide.
 - Format the reference list in Harvard style
 - Assemble all content into actual slides
 - Start building the data collection pipeline (Dune + CCXT)
+
+## 2026-09-30 — References (Harvard style)
+
+Bailey, D.H., Borwein, J.M., Salehipour, A., Lopez de Prado, M. and Zhu, Q.
+(2016) *Backtest overfitting in financial markets*. [Working paper].
+Available at: https://www.davidhbailey.com/dhbpapers/overfit-tools-at.pdf
+(Accessed: 30 September 2026).
+
+Chalkiadakis, I., Zaremba, A., Peters, G.W. and Chantler, M.J. (2022)
+'On-chain analytics for sentiment-driven statistical causality in
+cryptocurrencies', Blockchain: Research and Applications, 3(2).
+
+Chi, Y., Chu, Q. and Hao, W. (2024) Return and volatility forecasting
+using on-chain flows in cryptocurrency markets. arXiv:2411.06327
+[Preprint]. Available at: https://arxiv.org/abs/2411.06327
+(Accessed: 30 September 2026).
+
+Drakopoulou, V. (2026) Stablecoin liquidity as a crypto-native regime
+signal: state-dependent density forecasts for BTC, ETH, and SOL.
+[Preprint]. Research Square. Available at:
+https://www.researchsquare.com/article/rs-9715935/v1
+(Accessed: 30 September 2026).
+
+Grobys, K., Nasman, S. and Sandretto, D. (2026) 'Using on-chain data to
+predict Bitcoin cycles', Research in International Business and Finance,
+89.
+
+Kang, C., Lee, C., Ko, K., Woo, J. and Hong, J.W.K. (2020)
+'De-anonymization of the Bitcoin network using address clustering', in
+Blockchain and Trustworthy Systems: Second International Conference,
+BlockSys 2020. Singapore: Springer.
+
+Urumov, G. and Chountas, P. (2022) 'Clustering stock price volatility
+using intuitionistic fuzzy sets', Notes on Intuitionistic Fuzzy Sets,
+28(3), pp. 343-352.
+
+Zhu, B., Liu, D., Wan, X., Liao, G., Moallemi, C. and Bachu, B. (2026)
+'What drives liquidity on decentralized exchanges? Evidence from the
+Uniswap protocol', in Financial Cryptography and Data Security: FC 2025
+International Workshops. Cham: Springer.
+
+Two items flagged for a 30-second manual check before final submission:
+Bailey et al. journal/venue not fully confirmed (may be a working paper
+rather than a journal article), Kang et al. exact page numbers not
+confirmed from the source page.
+
+## Next steps
+
+- Assemble all content into actual slides (14-slide structure)
+- Start building the data collection pipeline (Dune + CCXT)
