@@ -1,10 +1,5 @@
 # Research Log
 
-This log is to help me track the research and scoping decisions for the project, and to also
-tell the supervisor to follow the progress.
-
----
-
 ## 2026-09-29 — Data source scoping
 
 Reviewed the free/freemium data landscape for each of the 14 research questions,
@@ -293,9 +288,9 @@ project, not full Scrum with defined roles and ceremonies.
 
 **Analytical methods and success metrics (per objective):** the dev
 methodology (Agile) governs how the project is built; these are the actual
-technical methods and the specific pass/fail metric each one is judged
+technical methods and the specific pass/fail metric, each one is judged
 against, so "success" is defined in advance rather than decided after
-seeing the results, which is itself a safeguard against the overfitting
+seeing the results, which is itself a safeguard against overfitting
 risk raised in Objective 7.
 
 | Objective | Method | Metric for success |
