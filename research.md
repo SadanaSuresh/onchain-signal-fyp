@@ -93,10 +93,74 @@ what is visible from market data alone.
   trading, a mobile app (web only), and any on-chain signals beyond the 4
   chosen types
 
+## 2026-09-30 — Background Review: literature and existing solutions
+
+Found and verified 8 real academic sources (checked directly against the
+publisher/arXiv/Springer pages, not taken on trust):
+
+1. Chi, Y., Chu, Q. and Hao, W., 'Return and Volatility Forecasting Using
+   On-Chain Flows in Cryptocurrency Markets', arXiv 2411.06327
+2. Grobys, K., Näsman, S. and Sandretto, D., 'Using on-chain data to predict
+   Bitcoin cycles', Research in International Business and Finance, vol. 89,
+   2026
+3. Urumov, G. and Chountas, P., 'Clustering stock price volatility using
+   intuitionistic fuzzy sets', Notes on Intuitionistic Fuzzy Sets, 28(3),
+   2022 (my supervisor's own published paper)
+4. Chalkiadakis, I., Zaremba, A., Peters, G.W. and Chantler, M.J., 'On-chain
+   analytics for sentiment-driven statistical causality in cryptocurrencies',
+   Blockchain: Research and Applications, 3(2), 2022
+5. Bailey, D.H., Borwein, J.M., Salehipour, A., López de Prado, M. and
+   Zhu, Q., 'Backtest overfitting in financial markets', 2016
+6. Kang, C., Lee, C., Ko, K., Woo, J. and Hong, J.W.K., 'De-Anonymization of
+   the Bitcoin Network Using Address Clustering', BlockSys 2020, Springer
+7. Drakopoulou, V., 'Stablecoin Liquidity as a Crypto-Native Regime Signal:
+   State-Dependent Density Forecasts for BTC, ETH, and SOL', Research
+   Square preprint, 2026
+8. Zhu, B., Liu, D., Wan, X., Liao, G., Moallemi, C. and Bachu, B., 'What
+   Drives Liquidity on Decentralized Exchanges? Evidence from the Uniswap
+   Protocol', Financial Cryptography and Data Security FC 2025 Workshops,
+   Springer, 2026
+
+**Gap analysis:** existing research treats these signals in isolation, each
+study tests one on-chain signal type against price using its own
+methodology and time window, with no single study combining exchange
+flows, whale activity, stablecoin flows and DEX liquidity into one
+evaluated system. Bailey et al. (2016) show that testing multiple signals
+without proper validation risks false discoveries, a risk this literature
+does not consistently address. This project closes that gap by testing all
+four signal types together under walk-forward validation, presented
+through one dashboard.
+
+**Cross-source synthesis:** these sources do not fully agree with each
+other. Grobys et al. (2026) report strong backtested outperformance from
+on-chain indicators, but Bailey et al. (2016) show that this kind of result
+is exactly the pattern most vulnerable to false discovery from untested
+strategy variation, directly motivating Objective 7's walk-forward
+validation rather than treating it as a generic precaution. Similarly, Chi
+et al. model stablecoin flows as linear predictors of returns, while
+Drakopoulou finds stablecoin liquidity instead signals non-linear regime
+shifts, an open disagreement addressed by applying Urumov and Chountas's
+(2022) fuzzy clustering approach, originally developed for non-separable
+volatility data, to define these regimes within Objective 6's composite
+scoring.
+
+**Existing solutions reviewed:** Nansen (wallet labelling, ~$99-499/month),
+Glassnode (macro on-chain metrics, ~$29-999/month), Arkham Intelligence
+(entity labelling, ~$55/month, the tool I'm using), Chainalysis (blockchain
+forensics for compliance, ~$50k-200k/year, third-party estimate). All four
+surface on-chain data but none statistically test whether it predicts
+price, and none combine multiple signal types into one evaluated output.
+This project's contribution isn't new data collection (same free-tier
+sources), it's the testing and integration layer these platforms don't
+provide.
+
+**Background stats (industry context):** global crypto market cap over
+$3.9 trillion (Aug 2025), daily trading volume approximately $144 billion,
+Bitcoin dominance approximately 57%, global retail crypto trading activity
+$979 billion in Q1 2026 (TRM Labs, down 11% year-on-year).
+
 ## Next steps
 
-- Write the Background Review (real literature and existing systems, properly
-  cited)
 - Draft the Methodology and Tools & Technologies sections against the PP
   rubric
 - Build the Time Schedule (Gantt chart) with dates for all 7 objectives
