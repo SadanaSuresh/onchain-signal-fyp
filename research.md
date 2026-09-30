@@ -159,10 +159,61 @@ $3.9 trillion (Aug 2025), daily trading volume approximately $144 billion,
 Bitcoin dominance approximately 57%, global retail crypto trading activity
 $979 billion in Q1 2026 (TRM Labs, down 11% year-on-year).
 
+## 2026-09-30 — Tools & Technologies
+
+Dashboard framework decided: Streamlit over Flask (used previously on a
+personal project), because Streamlit has built-in charting and live-update
+components suited to a multi-signal dashboard, saving development time for
+the more heavily weighted Methodology and Q&A preparation.
+
+Full tools table with justification and alternatives-considered trade-off
+analysis for each phase:
+
+**Data collection (on-chain):** Dune Analytics, free custom SQL access to
+raw chain data. Alternative: Alchemy/Infura, more flexible raw blockchain
+access but requires manually building query/node infrastructure Dune
+already abstracts; kept as a fallback if a signal proves impossible to
+query through Dune.
+
+**Data collection (entity/whale):** Arkham Intelligence, free entity
+clustering and wallet history. Alternative: Nansen, more mature labelling
+but $99-499/month; Whale Alert, real-time flags but no historical data on
+the free tier, ruling it out for the 3-month historical requirement, though
+it could supplement Arkham for the live feed specifically.
+
+**Data collection (cross-venue):** DefiLlama, fully free, no rate limits.
+Alternative: Glassnode, more curated/analyst-ready metrics but limited free
+tier ($29-999/month for full granularity); DefiLlama's zero cost wins at
+student-project scale despite requiring more manual aggregation.
+
+**Data collection (DEX liquidity):** The Graph, free indexed subgraph
+queries. Alternative: direct Alchemy/Infura querying, more granular control
+but requires manually writing smart contract query logic; unnecessary since
+existing Uniswap subgraphs already expose the needed data.
+
+**Data collection (market data):** CCXT, free library unifying market data
+across exchanges. Alternative: direct exchange APIs, marginally lower
+latency but require separate integration per exchange; not worth it since
+this project isn't latency-sensitive.
+
+**Data storage/processing:** Python (pandas) + SQLite, free, no server
+setup. Alternative: PostgreSQL, better concurrent-write scalability, but
+unused capability for a single-user academic project.
+
+**Statistical analysis:** Python (statsmodels, scipy). Alternative: R,
+comparable statistical depth but would fragment the codebase between
+collection (Python) and analysis (R) for no analytical benefit.
+
+**Dashboard/visualization:** Streamlit, built-in charting/live-update.
+Alternative: Flask, more UI control but requires manually building
+charting functionality Streamlit provides natively.
+
+**Version control/documentation:** Git + GitHub, specifically requested by
+the supervisor for tracking progress via README.md and research.md.
+
 ## Next steps
 
-- Draft the Methodology and Tools & Technologies sections against the PP
-  rubric
+- Draft the Methodology section against the PP rubric
 - Build the Time Schedule (Gantt chart) with dates for all 7 objectives
 - Start building the data collection pipeline (Dune + CCXT) once the proposal
   scope is confirmed
