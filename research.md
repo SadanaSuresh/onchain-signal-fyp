@@ -211,9 +211,48 @@ charting functionality Streamlit provides natively.
 **Version control/documentation:** Git + GitHub, specifically requested by
 the supervisor for tracking progress via README.md and research.md.
 
+## 2026-09-30 — Methodology
+
+**Development methodology: Agile (iterative, solo-adapted).**
+
+The 7 objectives are naturally incremental and independently testable, and
+this is exploratory research, it isn't known in advance which of the 4
+signal types will actually prove predictive. That uncertainty is what
+Agile is built for, rather than Waterfall, which assumes fixed requirements
+upfront. This also matches the earlier decision to attempt all 14 of the
+supervisor's original questions and drop whichever parts don't work out
+rather than negotiate scope down in advance, iterate then descope based on
+what is learned.
+
+**Strength:** if an objective underperforms in early testing (e.g.
+anomaly detection or composite scoring), scope can adapt without the whole
+project collapsing, since each objective is a separately testable
+increment.
+
+**Limitation:** true Agile assumes a team with sprint reviews and flexible
+deadlines. As a solo student against fixed hard deadlines (PP, IPD, Final
+Report), this is Agile's iterative spirit adapted for a solo academic
+project, not full Scrum with defined roles and ceremonies.
+
+**Requirement elicitation methods:**
+- Supervisor consultation: Georgy's 14-question roadmap and tool-mapping
+  emails functioned as structured stakeholder elicitation, directly
+  shaping the 7 objectives
+- Literature review: the gap analysis from the Background Review elicited
+  the core functional requirement, no existing tool combines multiple
+  signal types with statistical validation, which became this project's
+  central requirement
+
+**Original contribution:** integrating four independently-studied on-chain
+signal types into one statistically validated system, a combination not
+attempted in any reviewed literature or existing platform, tested under
+walk-forward validation to guard against the overfitting risk identified
+as the field's primary failure mode.
+
 ## Next steps
 
-- Draft the Methodology section against the PP rubric
+- Draft Ethics, legal, social, EDI and sustainability considerations (10%)
 - Build the Time Schedule (Gantt chart) with dates for all 7 objectives
+- Format the reference list in Harvard style
 - Start building the data collection pipeline (Dune + CCXT) once the proposal
   scope is confirmed
