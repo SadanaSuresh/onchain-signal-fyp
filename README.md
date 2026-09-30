@@ -10,13 +10,13 @@ University of Westminster, BSc Computer Science
 
 ## Status
 
-Early scoping stage. Project proposal (PP) in progress, due 2 Nov 2026.
-This repo will be updated continuously as work develops, per supervisor's request.
+Project proposal (PP) in progress, due 2 Nov 2026.
+This repo will be updated continuously as my work develops.
 
 ## What this project is about
 
-Traders usually rely on price charts and market data, but this often misses on-chain
-transfer data, such as large amounts of a cryptocurrency moving in or out of exchanges.
+Traders usually rely on price charts and market data, but this often misses the on-chain
+transfer data, such as large amounts of cryptocurrency moving in or out of exchanges.
 This kind of activity can signal a price move before it shows up on the chart, which
 matters for a trader's P&L.
 
@@ -66,8 +66,3 @@ src/          data collection, processing and signal-testing code
 docs/         project proposal materials, diagrams, written notes
 research.md   ongoing research log
 ```
-
-## Disclaimer
-
-This is an academic project for educational purposes. Nothing here is financial
-advice or a trading recommendation.
