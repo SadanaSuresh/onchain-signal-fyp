@@ -1,18 +1,3 @@
-# On-Chain Signal Analysis for Crypto Trading
-
-**Final Year Project — 6COSC023W**
-University of Westminster, BSc Computer Science
-
-**Student:** Sadana Suresh (w21162895)
-**Supervisor:** Georgy Urumov
-
----
-
-## Status
-
-Project proposal (PP) in progress, due 2 Nov 2026.
-This repo will be updated continuously as my work develops.
-
 ## What this project is about
 
 Traders usually rely on price charts and market data, but this often misses the on-chain
