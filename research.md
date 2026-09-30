@@ -123,7 +123,7 @@ publisher/arXiv/Springer pages, not taken on trust):
    2022 (my supervisor's own published paper)
 4. Chalkiadakis, I., Zaremba, A., Peters, G.W. and Chantler, M.J., 'On-chain
    analytics for sentiment-driven statistical causality in cryptocurrencies',
-   Blockchain: Research and Applications, 3(2), 2022
+   Blockchain: Research and Applications, 3(2), Article 100063, 2022
 5. Bailey, D.H., Borwein, J.M., Salehipour, A., López de Prado, M. and
    Zhu, Q., 'Backtest overfitting in financial markets', 2016
 6. Kang, C., Lee, C., Ko, K., Woo, J. and Hong, J.W.K., 'De-Anonymization of
@@ -133,8 +133,9 @@ publisher/arXiv/Springer pages, not taken on trust):
    Square preprint, 2026
 8. Zhu, B., Liu, D., Wan, X., Liao, G., Moallemi, C. and Bachu, B., 'What
    Drives Liquidity on Decentralized Exchanges? Evidence from the Uniswap
-   Protocol', Financial Cryptography and Data Security FC 2025 Workshops,
-   Springer, 2026
+   Protocol', arXiv 2410.19107 (cited as the arXiv preprint; a possible
+   Springer FC 2025 workshop publication could not be verified, so it is
+   not claimed here)
 
 **Gap analysis:** existing research treats these signals in isolation, each
 study tests one on-chain signal type against price using its own
@@ -142,7 +143,7 @@ methodology and time window, with no single study combining exchange
 flows, whale activity, stablecoin flows and DEX liquidity into one
 evaluated system. Chalkiadakis et al. (2022) test statistical causality
 between on-chain sentiment and price using a single-signal framework, and
-Zhu et al. (2026) study what drives DEX liquidity on Uniswap in isolation
+Zhu et al. (2024) study what drives DEX liquidity on Uniswap in isolation
 from other on-chain signal types; both reinforce the single-signal pattern
 this project is built to move past. Bailey et al. (2016) show that testing
 multiple signals without proper validation risks false discoveries, a risk
@@ -370,14 +371,15 @@ management strategy for the Time Schedule slide.
 
 ## 2026-09-30 — References (Harvard style)
 
-Bailey, D.H., Borwein, J.M., Salehipour, A., Lopez de Prado, M. and Zhu, Q.
+Bailey, D.H., Borwein, J.M., Salehipour, A., López de Prado, M. and Zhu, Q.
 (2016) *Backtest overfitting in financial markets*. [Working paper].
 Available at: https://www.davidhbailey.com/dhbpapers/overfit-tools-at.pdf
 (Accessed: 30 September 2026).
 
 Chalkiadakis, I., Zaremba, A., Peters, G.W. and Chantler, M.J. (2022)
 'On-chain analytics for sentiment-driven statistical causality in
-cryptocurrencies', Blockchain: Research and Applications, 3(2).
+cryptocurrencies', Blockchain: Research and Applications, 3(2), Article
+100063.
 
 Chi, Y., Chu, Q. and Hao, W. (2024) Return and volatility forecasting
 using on-chain flows in cryptocurrency markets. arXiv:2411.06327
@@ -390,7 +392,7 @@ signal: state-dependent density forecasts for BTC, ETH, and SOL.
 https://www.researchsquare.com/article/rs-9715935/v1
 (Accessed: 30 September 2026).
 
-Grobys, K., Nasman, S. and Sandretto, D. (2026) 'Using on-chain data to
+Grobys, K., Näsman, S. and Sandretto, D. (2026) 'Using on-chain data to
 predict Bitcoin cycles', Research in International Business and Finance,
 89.
 
@@ -404,20 +406,28 @@ Urumov, G. and Chountas, P. (2022) 'Clustering stock price volatility
 using intuitionistic fuzzy sets', Notes on Intuitionistic Fuzzy Sets,
 28(3), pp. 343-352.
 
-Zhu, B., Liu, D., Wan, X., Liao, G., Moallemi, C. and Bachu, B. (2026)
+Zhu, B., Liu, D., Wan, X., Liao, G., Moallemi, C. and Bachu, B. (2024)
 'What drives liquidity on decentralized exchanges? Evidence from the
-Uniswap protocol', in Financial Cryptography and Data Security: FC 2025
-International Workshops. Cham: Springer.
+Uniswap protocol'. arXiv:2410.19107 [Preprint]. Available at:
+https://arxiv.org/abs/2410.19107 (Accessed: 30 September 2026).
 
-Verification update (30 Sept 2026): both flags now closed. Bailey et al.
-confirmed as a working paper, not a journal article — the source document
-(dated Feb 2016) has no journal or conference listed anywhere in it, so
-the citation above is correctly formatted as [Working paper]. Kang et al.
-confirmed via the Springer chapter page directly: pp. 489-501, in
-Communications in Computer and Information Science vol. 1267, edited by
-Zheng, Dai, Fu and Chen, published 12 November 2020, DOI
-10.1007/978-981-15-9213-3_38. Reference list above updated accordingly.
-All 8 references are now fully verified with no outstanding flags.
+Verification update (30 Sept 2026, second pass): all outstanding items now
+closed. Bailey et al. confirmed as a working paper, not a journal article
+(source document dated Feb 2016, no journal/conference listed anywhere in
+it). Kang et al. confirmed via the Springer chapter page directly: pp.
+489-501, Communications in Computer and Information Science vol. 1267,
+edited by Zheng, Dai, Fu and Chen, published 12 November 2020, DOI
+10.1007/978-981-15-9213-3_38. Chalkiadakis et al. confirmed as published
+in Blockchain: Research and Applications, vol. 3(2), June 2022, Article
+100063 (this journal uses article numbers instead of page ranges, which
+is why none were listed before). Zhu et al. could not be confirmed as
+published in the Financial Cryptography and Data Security FC 2025
+Springer workshop proceedings despite a direct search, so it is now cited
+as the verified arXiv preprint (2410.19107, Oct 2024) instead of an
+unverified Springer venue. Diacritics corrected for consistency: López de
+Prado (Bailey et al.) and Näsman (Grobys et al.). All 8 references are now
+verified against a primary source with no unresolved or unverifiable
+claims.
 
 ## Next steps
 
