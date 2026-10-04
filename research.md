@@ -266,15 +266,16 @@ supervisor's original questions and drop whichever parts don't work out
 rather than negotiate scope down in advance, iterate then descope based on
 what is learned.
 
-**Strength:** if an objective underperforms in early testing (e.g.
-anomaly detection or composite scoring), scope can adapt without the whole
-project collapsing, since each objective is a separately testable
-increment.
+**Strength:** if a specific objective does not perform well during its
+initial testing, the scope will be adjusted to make sure the whole
+project does not collapse, as these objectives are being tested
+individually.
 
-**Limitation:** true Agile assumes a team with sprint reviews and flexible
-deadlines. As a solo student against fixed hard deadlines (PP, IPD, Final
-Report), this is Agile's iterative spirit adapted for a solo academic
-project, not full Scrum with defined roles and ceremonies.
+**Limitation:** true Agile assumes a team with sprint reviews and
+flexible deadlines, but as a student working on a fixed-deadline project
+(PP, IPD, Final Report), this is Agile's iterative cycle adapted for a
+solo academic project, not full Scrum, which needs defined roles and
+team ceremonies.
 
 **Requirement elicitation methods:**
 - Supervisor consultation: Georgy's 14-question roadmap and tool-mapping
