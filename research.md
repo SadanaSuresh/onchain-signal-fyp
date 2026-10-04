@@ -3,7 +3,7 @@
 ## 2026-09-29 — Data source scoping
 
 Reviewed the free/freemium data landscape for each of the 14 research questions,
-given by the supervisor's advise. List of resources I checked and confirmed:
+given by the supervisor's advice. List of resources I checked and confirmed:
 
 - **Dune Analytics / Flipside Crypto** — free SQL access to raw Ethereum, Bitcoin
   and Solana chain data. Covers custom queries on transfers, DEX flows and
@@ -47,9 +47,9 @@ signals into a composite score (Q13).
 
 The biggest risk in this kind of research, since
 testing a lot of on-chain variables against price increases the chance of
-finding a "signal" that is just noise. How to move forward?:
+finding a "signal" that is just noise. The approach:
 
-- I will form a hypotheses first, using questions 2 to 8 as priors, instead of testing
+- I will form a hypothesis first, using questions 2 to 8 as priors, instead of testing
   everything blindly.
 - Test only a small, pre-defined set of signals
 - Use walk-forward validation rather than in-sample testing
