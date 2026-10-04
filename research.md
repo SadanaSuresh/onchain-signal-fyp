@@ -57,12 +57,12 @@ finding a "signal" that is just noise. The approach:
 ## 2026-09-29 — Problem Statement, Aim, Objectives and Scope finalised
 
 **Problem statement:** Traders who rely only on price charts and market
-data miss a category of information that exists before the price actually
-moves: on-chain activity. A large amount of crypto moving from a wallet to
-an exchange is usually a sign that a sale is coming, but chart-only traders
+data miss a specific category of information that exists even before the price actually
+moves: on-chain activity. When a large amount of crypto moves from a wallet to
+an exchange it is usually a sign that a sale is coming, but chart-only traders
 don't see this happening on the blockchain. By the time the price actually
-drops and they notice, the move has already started, so they miss out on
-profit or take a bigger loss than if they had seen the signal early. This
+drops and they notice, the move has already started, and they miss out on
+profit or take a bigger loss than initial if they were able to see the data earlier. This
 isn't a hypothetical gap: institutional analytics platforms (Nansen,
 Glassnode, Chainalysis) already sell this exact type of on-chain visibility
 to well-funded desks, at prices from roughly $99/month to an estimated
@@ -73,7 +73,7 @@ whether on-chain signals carry information about price and volatility that
 isn't already reflected in market data, and whether a free-tier tool can
 give an individual trader that same early visibility.
 
-**Aim:** develop a web dashboard for traders that surfaces on-chain signals
+**Aim:** build a web dashboard for traders that surfaces on-chain signals
 (exchange inflows/outflows, whale wallet transfers, stablecoin flows, DEX
 liquidity activity) across Bitcoin and Ethereum, to evaluate whether these
 signals provide predictive value for price movement and volatility beyond
@@ -257,9 +257,9 @@ general merit.
 
 **Development methodology: Agile (iterative, solo-adapted).**
 
-The 7 objectives are naturally incremental and independently testable, and
-this is exploratory research, it isn't known in advance which of the 4
-signal types will actually prove predictive. That uncertainty is what
+The 7 objectives are incremental and can be tested independently and
+this is exploratory research, so, it isn't known in advance which of the 4
+signal types will actually be proven. That uncertainty is what
 Agile is built for, rather than Waterfall, which assumes fixed requirements
 upfront. This also matches the earlier decision to attempt all 14 of the
 supervisor's original questions and drop whichever parts don't work out
