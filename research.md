@@ -266,10 +266,9 @@ supervisor's original questions and drop whichever parts don't work out
 rather than negotiate scope down in advance, iterate then descope based on
 what is learned.
 
-**Strength:** if an objective underperforms in early testing (e.g.
-anomaly detection or composite scoring), scope can adapt without the whole
-project collapsing, since each objective is a separately testable
-increment.
+**Strength:** if an objective underperforms during testing (e.g.
+anomaly detection or composite scoring), the scope can be adapted without the whole
+project collapsing, since each objective is individually tested.
 
 **Limitation:** true Agile assumes a team with sprint reviews and flexible
 deadlines. As a solo student against fixed hard deadlines (PP, IPD, Final
@@ -328,8 +327,8 @@ risk Agile's incremental structure avoids here.
 |---|---|---|
 | Legal | Each data source (Dune, Arkham, DefiLlama, CCXT) has its own free-tier ToS | Strict compliance per API: no scraping beyond limits, no reselling data, no exceeding rate limits |
 | Privacy | Blockchain wallets are pseudonymous, but entity clustering (Objective 2) can link them to real identities | Only use identity labels already public via Arkham; never attempt independent deanonymization |
-| Social/financial harm | Dashboard's prediction flags could be misread as guaranteed trading advice | Mandatory disclaimer (academic purpose only); display confidence ranges, not binary buy/sell signals |
-| EDI | Stablecoins are disproportionately used by people in unstable economies as a survival tool, not speculation (~90% of Venezuela's Binance P2P volume is USDT) | Keep framing analytical/academic, not "get rich" marketing language |
+| Social/financial harm | Dashboard's prediction flags could be interpreted as guaranteed trading facts | Mandatory disclaimer (academic purpose only); display confidence ranges, not binary buy/sell signals |
+| EDI | Stablecoins are used by people incorrectly in unstable economies as a survival tool, not speculation (~90% of Venezuela's Binance P2P volume is USDT) | Keep framing analytical/academic, not "get rich" marketing language |
 | Sustainability | No new blockchain computation/mining created, only querying existing data | Avoid redundant/repeated API queries to minimize load on free-tier infrastructure |
 | Systemic risk (beyond individual harm) | If signal-based tools like this become widely adopted, coordinated reaction to the same on-chain events could amplify volatility rather than reduce information asymmetry | Acknowledged as a scaling limitation beyond this project's scope to test, but not left unaddressed: the dashboard will display confidence ranges and historical hit-rate rather than an instant real-time alert, deliberately introducing a short interpretation delay before a user can act, which reduces the chance of many users reacting to the identical signal in the same instant |
 | Legal boundary (GDPR) | Wallet addresses are pseudonymous, not directly tied to verified identity by this project, so likely outside GDPR's personal data definition; however entity clustering makes this boundary not absolute | Will not attempt independent deanonymization beyond labels already public through Arkham |
