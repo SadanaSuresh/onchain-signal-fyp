@@ -3,7 +3,7 @@
 ## 2026-09-29 — Data source scoping
 
 Reviewed the free/freemium data landscape for each of the 14 research questions,
-based on the supervisor's mapping. Summary of what was checked and confirmed:
+given by the supervisor's advise. List of resources I checked and confirmed:
 
 - **Dune Analytics / Flipside Crypto** — free SQL access to raw Ethereum, Bitcoin
   and Solana chain data. Covers custom queries on transfers, DEX flows and
@@ -29,12 +29,10 @@ based on the supervisor's mapping. Summary of what was checked and confirmed:
 - **CCXT** — free Python library for market price/volume data across exchanges,
   used alongside the on-chain sources for comparison (Q1, Q11).
 
-**Confirmed stack:** Dune + Arkham + DefiLlama + Coinglass + CCXT covers the
-a large majority of the data needed for the 14 questions, at no cost. The
-remaining gap is real-time anomaly detection (Q9) and large-scale entity
-clustering (Q5), which is only available at usable depth through paid tools
-(Nansen, Chainalysis) and will instead be approached as a DIY build on top of
-the free data.
+**Confirmed stack:** Dune + Arkham + DefiLlama + Coinglass + CCXT has the majority of data
+that is needed for the 14 questions, at no cost. The remaining gap is real-time anomaly detection (Q9)
+and large-scale entity clustering (Q5), which is only available at usable depth through paid subscriptions
+(Nansen, Chainalysis) but will try to approach it as a DIY build along with the free data.
 
 ## Questions flagged as requiring custom analysis (no off-the-shelf tool)
 
@@ -47,12 +45,12 @@ signals into a composite score (Q13).
 
 ## Methodology note: overfitting and multiple testing (Q14)
 
-Flagged by the supervisor as the biggest risk in this kind of research, since
-Testing many possible on-chain variables against price increases the chance of
-finding a "signal" that is really just noise. The approach going forward:
+The biggest risk in this kind of research, since
+testing a lot of on-chain variables against price increases the chance of
+finding a "signal" that is just noise. How to move forward?:
 
-- Form hypotheses first, using questions 2 to 8 as priors, rather than testing
-  everything blindly
+- I will form a hypotheses first, using questions 2 to 8 as priors, instead of testing
+  everything blindly.
 - Test only a small, pre-defined set of signals
 - Use walk-forward validation rather than in-sample testing
 
