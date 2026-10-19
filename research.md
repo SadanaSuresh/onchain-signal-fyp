@@ -38,7 +38,11 @@ like Nansen and Chainalysis, so I'll try building my own versions on top of
 the free data.
 
 *Update 13 Oct: I've swapped Dune for Google BigQuery's public datasets as
-the main on-chain source (see the 13 Oct entry).*
+the main on-chain source (see the 13 Oct entry). I also dropped DefiLlama
+(BigQuery and The Graph cover the same flows) and Coinglass (open interest
+and funding are derivatives data, not one of my 4 on-chain signals). Arkham
+needs API approval, so the backup is the wallet addresses exchanges publish
+themselves.*
 
 ## Questions that no tool answers directly
 
@@ -92,7 +96,8 @@ price movement and volatility beyond what market data shows.
    liquidity) using BigQuery, exchange wallet labels and The Graph. (Q2-Q8)
 3. By 8 Jan 2027: anomaly detection with rolling z-scores per wallet/token
    instead of one fixed threshold. (Q9)
-4. By 21 Jan 2027: compare a lagged-returns model against the same model
+4. By 21 Jan 2027: compare a market-only model (the target's own last 24
+   hours plus the last 24 hours of trading volume) against the same model
    plus each signal, on a walk-forward split. It passes if out-of-sample
    RMSE is lower for next-hour log returns and realised volatility (both
    chosen in advance), and the difference holds up on a Diebold-Mariano
@@ -149,8 +154,8 @@ results from on-chain indicators, but that's exactly the kind of result
 Bailey et al. warn about, which is why I'm using walk-forward validation.
 Chi et al. treat stablecoin flows as a simple linear predictor, while
 Drakopoulou finds they work more like a signal for switching between market
-regimes. A possible way to look at this is to use my supervisor's fuzzy
-clustering method to define the regimes.
+regimes. Using my supervisor's fuzzy clustering method to define the regimes is an
+idea for later, not part of the current plan.
 
 **Existing tools:** Nansen (wallet labels, ~$99-499/month), Glassnode
 (on-chain metrics, ~$29-999/month), Arkham (entity labels, the one I plan to
@@ -265,7 +270,7 @@ design before knowing if any single signal works at all.
 | Legal | Every source (BigQuery, Arkham, The Graph, CCXT, Alchemy/Infura, Mempool.space) has its own terms | Stick to each API's terms: no scraping, no reselling, stay within rate limits |
 | Privacy | Wallets are pseudonymous, but clustering can link them to real people | Only use labels that are already public (exchanges, funds), never try to de-anonymise anyone |
 | Financial harm | People might read a prediction as a sure thing | Disclaimer, and show ranges and hit rates instead of buy/sell signals |
-| EDI | In unstable economies stablecoins are often a way to protect savings, not speculation (around 90% of Venezuela's Binance P2P volume is USDT) | Keep the wording plain and analytical, no "get rich" language |
+| EDI | In unstable economies stablecoins are often a way to protect savings, not speculation (for example where the local currency loses value quickly) | Keep the wording plain and analytical, no "get rich" language |
 | Sustainability | No mining or new transactions, just querying data that already exists | Avoid repeat queries, filter BigQuery scans, store data locally |
 | Crowd effects | If lots of people used tools like this, they could all react to the same event at once and make prices swing more | Out of scope to test, but the dashboard shows ranges and a historical hit rate rather than instant alerts, so people aren't all pushed to act at the same second |
 | GDPR | Wallet addresses aren't tied to names by this project, so probably not personal data, but clustering makes that line blurry | Same as privacy: public labels only, no de-anonymising |
@@ -387,12 +392,8 @@ What we agreed, now in the slides as well:
   not 9 separate chances to pass.
 - **No look-ahead:** any scaling is fitted on the training data only, and
   each signal only uses data that was known at that hour.
-- **Why this matters:** it's the same idea as the Ito integral, which takes
-  the value at the start of each interval, so your position is fixed before
-  the move happens. The Stratonovich integral uses the midpoint, which
-  depends on where the price goes later in that interval. Walk-forward does
-  the same for the backtest: the model for each test week is fixed before
-  that week starts.
+- **Why this matters:** the model for each test week is fixed before that
+  week starts, so it can't use anything it wouldn't have known at the time.
 
 ## 13 Oct 2026 - Data check and full test design
 
