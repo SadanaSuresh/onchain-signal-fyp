@@ -20,7 +20,9 @@ is in `research.md`):
 4. Telling different types of transfers apart
 5. Entity clustering (grouping wallets that belong to the same owner)
 6. Stablecoin flows
-7. Money moving between exchanges and chains
+7. Money moving between exchanges and chains (only in part: exchange flows
+   show money moving in and out of exchanges, but cross-chain flows are out
+   of scope since DefiLlama was dropped)
 8. DEX (decentralised exchange) liquidity pools
 9. Spotting unusual activity compared with a wallet's or token's normal behaviour
 10. Timing (when a transfer is sent vs when it's confirmed on-chain)

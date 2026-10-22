@@ -72,7 +72,7 @@ mean a sale is coming, but a chart-only trader won't see that. By the time
 the price drops and they notice, the move has already started, so they miss
 out or lose more than they would have if they'd seen it earlier. Platforms
 like Nansen, Glassnode and Chainalysis already sell this kind of visibility
-to well-funded desks, from around $99 a month up to an estimated
+to well-funded desks, from around $49 a month up to an estimated
 $50,000-200,000 a year, so the information clearly has value. It just isn't
 available to someone without that budget. My project looks at whether
 on-chain signals tell you something about price and volatility that market
@@ -84,7 +84,8 @@ that early view.
 liquidity) for Bitcoin and Ethereum, and use it to test whether they predict
 price movement and volatility beyond what market data shows.
 
-**Objectives** (7, covering all 14 questions; dates come from my timeline):
+**Objectives** (7, covering the 14 questions except the cross-chain part of
+Q7, see the 22 Oct entry; dates come from my timeline):
 
 1. By 20 Nov 2026: a data pipeline pulling on-chain data (BigQuery) and
    market data (CCXT) for BTC and ETH, with 3 months of history at each
@@ -93,7 +94,8 @@ price movement and volatility beyond what market data shows.
    BTC). (Q1, Q10)
 2. By 8 Jan 2027: collect the 4 signals (exchange flows, whale transfers
    cleaned up with labels and transfer types, stablecoin flows, DEX
-   liquidity) using BigQuery, exchange wallet labels and The Graph. (Q2-Q8)
+   liquidity) using BigQuery, exchange wallet labels and The Graph. (Q2-Q8,
+   Q7 only in part)
 3. By 8 Jan 2027: anomaly detection with rolling z-scores per wallet/token
    instead of one fixed threshold. (Q9)
 4. By 21 Jan 2027: compare a market-only model (the target's own last 24
@@ -108,8 +110,10 @@ price movement and volatility beyond what market data shows.
    shortest window that is still significant after Holm (64 tests) and
    holds out-of-sample is the lead time. If none does, I don't claim a
    lead. (Q12)
-6. By 10 Mar 2027: a composite score from all 4 signals, tested against
-   the best single signal out-of-sample with Diebold-Mariano. (Q13)
+6. By 10 Mar 2027: a composite score from all 4 signals (fixed equal
+   weights), tested against the best single signal out-of-sample with
+   Diebold-Mariano after Holm correction (4 tests: 2 coins x 2 targets).
+   (Q13)
 7. By 10 Mar 2027: walk-forward validation across objectives 4-6 so I'm
    not fooled by overfitting or by running lots of tests. (Q14)
 
@@ -122,7 +126,8 @@ price movement and volatility beyond what market data shows.
 ## 30 Sep 2026 - Literature and existing tools
 
 I found 8 academic sources and checked each one against the publisher,
-arXiv or Springer page myself:
+arXiv or Springer page myself (3 more added in October, numbers 9-11, so
+the slides review 11):
 
 1. Chi, Chu and Hao - return and volatility forecasting using on-chain
    flows (arXiv 2411.06327)
@@ -139,12 +144,19 @@ arXiv or Springer page myself:
    preprint, 2026)
 8. Zhu et al. - what drives liquidity on Uniswap (arXiv 2410.19107). I
    couldn't confirm a Springer version, so I cite the arXiv preprint.
+9. Ante, Fiedler and Strehle - stablecoin issuance and abnormal crypto
+   returns (Finance Research Letters, 2021)
+10. Granger - the original causality test, used only as supporting
+   evidence in Objective 4 (Econometrica, 1969)
+11. Harvey, Liu and Zhu - multiple-testing bias in finance research
+   (Review of Financial Studies, 2016)
 
 **The gap:** each study looks at one type of signal on its own, with its
 own method and time window. None of them puts exchange flows, whale
 activity, stablecoin flows and DEX liquidity together in one tested system.
 Chalkiadakis et al. test one sentiment signal against price, and Zhu et al.
-look at DEX liquidity by itself. Bailey et al. show that testing lots of
+look at DEX liquidity by itself. Bailey et al. and Harvey, Liu and Zhu
+show that testing lots of
 signals without proper validation leads to false discoveries, and most of
 this literature doesn't really deal with that. So my project tests all
 four together, with walk-forward validation, in one dashboard.
@@ -157,9 +169,9 @@ Drakopoulou finds they work more like a signal for switching between market
 regimes. Using my supervisor's fuzzy clustering method to define the regimes is an
 idea for later, not part of the current plan.
 
-**Existing tools:** Nansen (wallet labels, ~$99-499/month), Glassnode
-(on-chain metrics, ~$29-999/month), Arkham (entity labels, the one I plan to
-use) and Chainalysis (compliance forensics, ~$50k-200k/year, third-party
+**Existing tools:** Nansen (wallet labels, free tier or Pro from $49/month), Glassnode
+(on-chain metrics, paid plans from $49/month), Arkham (entity labels; my label source only
+if its API access is approved, otherwise exchange-published addresses) and Chainalysis (compliance forensics, ~$50k-200k/year, third-party
 estimate). They all show on-chain data, but none of them tests whether it
 actually predicts price, and none combines several signals into one tested
 output. That's what my project adds. It's not new data, it's the testing
@@ -189,8 +201,10 @@ What I'm using for each part, and what I decided against:
   only.
 - **Live feed:** Alchemy/Infura for Ethereum and Mempool.space for Bitcoin,
   both free. BigQuery is too far behind for this.
-- **Whale/entity labels:** Arkham. Nansen has better labels but costs
-  $99-499 a month. Whale Alert has no history on the free tier, so it can't
+- **Whale/entity labels:** Arkham, but only if its API access is approved
+  (see 15 Oct). If not, the wallet addresses exchanges publish themselves.
+  Nansen has better labels, but Pro costs
+  from $49 a month. Whale Alert has no history on the free tier, so it can't
   cover 3 months, but it could help with the live feed.
 - **Cross-venue:** I dropped DefiLlama on 13 Oct. Stablecoin flows now come
   from BigQuery token transfers and DEX liquidity from The Graph.
@@ -206,7 +220,7 @@ What I'm using for each part, and what I decided against:
 - **Version control:** Git and GitHub, which my supervisor asked for so he
   can follow progress through README.md and this log.
 
-**How it fits together:** the data side (BigQuery, Arkham, The Graph, CCXT,
+**How it fits together:** the data side (BigQuery, Arkham if approved, The Graph, CCXT,
 Alchemy/Infura, Mempool.space) was chosen because it's all free and needs no
 servers. My supervisor's tool list covered most of the 14 questions, and on
 13 Oct he agreed BigQuery should replace Dune. The analysis side (pandas,
@@ -237,6 +251,7 @@ team ceremonies.
 
 **Where my requirements come from:**
 - My supervisor: his 14 questions and tool list shaped the 7 objectives
+  (all except the cross-chain part of Q7, which is out of scope)
 - The literature: the gap (no tool combines several signals with proper
   testing) became the main requirement
 
@@ -248,7 +263,7 @@ any results, so I can't move the goalposts later):
 | 3 (anomaly detection) | Rolling z-score per wallet/token, not one fixed threshold | It flags transfers more than 2 standard deviations from that wallet/token's recent average |
 | 4 (beyond market data) | Baseline: OLS on the target's own last 24 hourly values plus the last 24 hourly trading volumes (log), refitted each training window. Signal model: the same plus one signal's last 24 hourly values. Walk-forward split; ADF test first; Granger as support only | Lower out-of-sample RMSE for next-hour log returns and realised volatility, and the gap is significant on Diebold-Mariano after Holm (16 tests). A signal that fails is reported, not hidden |
 | 5 (lead-lag) | Correlation between each signal and later returns and volatility at 30min, 1hr, 4hr and 24hr, with Newey-West errors because the longer windows overlap | The shortest window that's significant after Holm (64 tests) and holds out-of-sample is the lead time |
-| 6 (composite) | Equal weights on the 4 z-scored signals, fixed in advance; fitted weights only as a side check | Beats the best single signal (picked on training data only) out-of-sample on Diebold-Mariano |
+| 6 (composite) | Equal weights on the 4 z-scored signals, fixed in advance; fitted weights only as a side check | Beats the best single signal (picked on training data only) out-of-sample on Diebold-Mariano, after Holm (4 tests: 2 coins x 2 targets) |
 | 7 (walk-forward) | Expanding window: train on weeks 1-4, test week 5, then keep adding weeks and roll forward weekly to week 13 (9 test weeks). Scaling is fitted inside each training window and signals only use data known at that hour | RMSE pooled over the 9 test weeks (about 1,500 hours). Winning individual weeks is just a stability note. Nothing counts as confirmed unless it holds out-of-sample |
 
 **What's original:** each method on its own is standard. What's new is
@@ -276,7 +291,7 @@ design before knowing if any single signal works at all.
 | GDPR | Wallet addresses aren't tied to names by this project, so probably not personal data, but clustering makes that line blurry | Same as privacy: public labels only, no de-anonymising |
 
 **SDGs:** SDG 10 (reduced inequalities) is the main one. The good on-chain
-tools are priced for institutions (Nansen ~$99-499 a month, Chainalysis an
+tools are priced for institutions (Nansen Pro from $49 a month, Chainalysis an
 estimated $50k-200k a year). I'm only using free data, so an individual
 trader gets the same kind of analysis without the budget.
 
@@ -291,7 +306,7 @@ targets about 2 weeks before each official deadline as a buffer:
 | 2. Data pipeline (Obj 1) | 20 Nov 2026 | Feeds SRS, 4 Dec 2026 | Build the pipeline | BigQuery queries (filtered by date and column), live feed, CCXT, SQLite, 3-month backfill | BigQuery quota and rate limits: filter queries, start with a shorter window, then expand |
 | 3. Signals + anomalies (Obj 2, 3) | 8 Jan 2027 | First code demo, 22 Jan 2027 | Collect the 4 signals, build anomaly detection | Exchange flows first, then whales, stablecoins, DEX liquidity, rolling z-score | Labels harder than expected: simplest signal first, add the rest step by step |
 | 4. Testing + first dashboard (Obj 4, 5) | 21 Jan 2027 | IPD, 4 Feb 2027 | Forecast tests and lead-lag, first dashboard | Baseline and signal models, Holm, first dashboard view | No significant result: that's still a valid finding, report it |
-| 5. Composite + validation (Obj 6, 7) | 10 Mar 2027 | - | Composite score, walk-forward | Equal weights first, then fitted weights, train/test splits | Slow backtests: start simple |
+| 5. Composite + validation (Obj 6, 7) | 10 Mar 2027 | - | Composite score, walk-forward | Fixed equal weights (fitted weights only as a side check), train/test splits | Slow backtests: start simple |
 | 6. Dashboard + report | 8 Apr 2027 | Report/software/video, 22 Apr 2027 | Finish the dashboard, write up, record demo | Polish UI, write results, edit video | Writing crunch: draft each section as each objective finishes |
 | 7. Viva prep | 20 Apr 2027 | Viva, 29 Apr-14 May 2027 | Rehearse | Mock Q&A on all 7 objectives | - |
 
@@ -368,7 +383,8 @@ What we agreed, now in the slides as well:
 - **Volatility:** added as a second target, decided in advance, so it's
   part of the Holm correction too.
 - **Holm:** at 0.05 for each group. Objective 4 has 16 tests (4 signals x 2
-  coins x 2 targets) and Objective 5 has 64. With only 3 months of data, a
+  coins x 2 targets) and Objective 5 has 64. (Objective 6 adds 4 more, see
+  22 Oct.) With only 3 months of data, a
   null result is likely and that's fine.
 - **Objective 5:** fixed the test. It's the correlation between each
   signal and later returns/volatility, not return autocorrelation, which
@@ -435,7 +451,8 @@ with the rest.
 - Timing: a transfer counts in the hour its block is mined and is only used
   from the next hour. A daily signal uses the last full day.
 - Composite (Obj 6): equal weights on z-scored signals. Fitted weights are
-  only a side check.
+  only a side check. Compared with the best single signal by
+  Diebold-Mariano, Holm over 4 tests (2 coins x 2 targets).
 - What a pass means: the signal predicts something for BTC and ETH in this
   3-month sample. It doesn't mean profit, since I'm not modelling fees or
   slippage.
@@ -467,3 +484,32 @@ trading volumes (log, from Binance through CCXT), refitted in each training
 window. The signal model is the same plus one signal. This makes the test
 harder to pass: a signal now has to add something beyond both past returns
 and volume.
+
+## 22 Oct 2026 - Supervisor corrections after the formative draft
+
+My supervisor went through the slides and this repo and found some places
+that didn't match. What I changed:
+
+- **Exchange-flow chart:** it said Objective 5 tests the inflow idea. It's
+  Objective 4 (does the signal improve the forecast). Objective 5 is only
+  the lead time.
+- **Literature trend line:** it said I fix "one horizon". I actually fix two
+  targets (next-hour return and realised volatility), four lead-lag windows
+  and one walk-forward design, all in advance.
+- **Composite:** the methodology table said "weighted mix" and "equal weights
+  first". It's fixed equal weights, with fitted weights only as a side
+  check, which is what the test design slide already said.
+- **Holm counts:** Objective 6 is also a Diebold-Mariano test, so it gets its
+  own Holm group of 4 tests (2 coins x 2 targets). The groups are now 16
+  (Obj 4), 64 (Obj 5) and 4 (Obj 6).
+- **Sources:** the slides review 11 sources. Ante et al., Granger and
+  Harvey et al. are now listed in the 30 Sep literature section too.
+- **Arkham:** the 30 Sep tools notes now say Arkham is only the label source
+  if its API is approved, with exchange-published addresses as the backup.
+- **Tool prices:** older entries had Nansen at $99-499 and Glassnode at
+  $29-999 a month. Updated to the prices on the slides (Nansen Pro and
+  Glassnode paid plans from $49 a month, checked in October).
+- **Question 7:** with DefiLlama dropped, cross-chain flows are out of
+  scope. Exchange flows still show money moving in and out of exchanges, so
+  Q7 is only covered in part. The README, the scope slide and the
+  methodology slide now say this.
