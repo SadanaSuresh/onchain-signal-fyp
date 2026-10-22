@@ -302,10 +302,10 @@ targets about 2 weeks before each official deadline as a buffer:
 
 | Phase | My target | Official deadline | Main task | Sub-tasks | Risk and fix |
 |---|---|---|---|---|---|
-| 1. Proposal | 20 Oct 2026 | 2 Nov 2026 | Finish and rehearse the PP | Finish slides, rehearse Q&A | 2-week buffer for rehearsal |
+| 1. Proposal | 22 Oct 2026 (formative draft) | 2 Nov 2026 | Finish and rehearse the PP | Finish slides, supervisor fixes, ethics form, rehearse Q&A | Away 2-23 Nov during the talk window: talk requested online, rehearsal done before leaving |
 | 2. Data pipeline (Obj 1) | 20 Nov 2026 | Feeds SRS, 4 Dec 2026 | Build the pipeline | BigQuery queries (filtered by date and column), live feed, CCXT, SQLite, 3-month backfill | BigQuery quota and rate limits: filter queries, start with a shorter window, then expand |
 | 3. Signals + anomalies (Obj 2, 3) | 8 Jan 2027 | First code demo, 22 Jan 2027 | Collect the 4 signals, build anomaly detection | Exchange flows first, then whales, stablecoins, DEX liquidity, rolling z-score | Labels harder than expected: simplest signal first, add the rest step by step |
-| 4. Testing + first dashboard (Obj 4, 5) | 21 Jan 2027 | IPD, 4 Feb 2027 | Forecast tests and lead-lag, first dashboard | Baseline and signal models, Holm, first dashboard view | No significant result: that's still a valid finding, report it |
+| 4. Testing + first dashboard (Obj 4, 5) | 21 Jan 2027 | IPD, 4 Feb 2027 | Forecast tests and lead-lag, first dashboard | Baseline and signal models, Holm, first dashboard view | No significant result: that's still a valid finding, report it. The ethics declaration must be accepted by IPD, or the IPD mark is 0 |
 | 5. Composite + validation (Obj 6, 7) | 10 Mar 2027 | - | Composite score, walk-forward | Fixed equal weights (fitted weights only as a side check), train/test splits | Slow backtests: start simple |
 | 6. Dashboard + report | 8 Apr 2027 | Report/software/video, 22 Apr 2027 | Finish the dashboard, write up, record demo | Polish UI, write results, edit video | Writing crunch: draft each section as each objective finishes |
 | 7. Viva prep | 20 Apr 2027 | Viva, 29 Apr-14 May 2027 | Rehearse | Mock Q&A on all 7 objectives | - |
@@ -513,3 +513,13 @@ that didn't match. What I changed:
   scope. Exchange flows still show money moving in and out of exchanges, so
   Q7 is only covered in part. The README, the scope slide and the
   methodology slide now say this.
+
+## 22 Oct 2026 - Time schedule and references tidy-up
+
+- Updated the Gantt chart in Excel: bigger bold text, real dates, every
+  module milestone marked (22 Oct, 2 Nov, 4 Dec, 22 Jan, 4 Feb, 22 Apr,
+  29 Apr) and the composite as fixed equal weights.
+- Marked my trip (2-23 Nov) as a planned risk: the talk is requested online.
+- Added the new ethics rule: the declaration must be accepted by IPD.
+- Made the reference list consistent (full stops after italic titles, one
+  preprint format, Journal of Business & Economic Statistics).
