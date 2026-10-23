@@ -84,8 +84,7 @@ that early view.
 liquidity) for Bitcoin and Ethereum, and use it to test whether they predict
 price movement and volatility beyond what market data shows.
 
-**Objectives** (7, covering the 14 questions except the cross-chain part of
-Q7, see the 22 Oct entry; dates come from my timeline):
+**Objectives** (7, covering all 14 questions; dates come from my timeline):
 
 1. By 20 Nov 2026: a data pipeline pulling on-chain data (BigQuery) and
    market data (CCXT) for BTC and ETH, with 3 months of history at each
@@ -94,8 +93,8 @@ Q7, see the 22 Oct entry; dates come from my timeline):
    BTC). (Q1, Q10)
 2. By 8 Jan 2027: collect the 4 signals (exchange flows, whale transfers
    cleaned up with labels and transfer types, stablecoin flows, DEX
-   liquidity) using BigQuery, exchange wallet labels and The Graph. (Q2-Q8,
-   Q7 only in part)
+   liquidity) using BigQuery, exchange wallet labels and The Graph. (Q2-Q8; Q7 through BigQuery,
+   see 23 Oct)
 3. By 8 Jan 2027: anomaly detection with rolling z-scores per wallet/token
    instead of one fixed threshold. (Q9)
 4. By 21 Jan 2027: compare a market-only model (the target's own last 24
@@ -251,7 +250,6 @@ team ceremonies.
 
 **Where my requirements come from:**
 - My supervisor: his 14 questions and tool list shaped the 7 objectives
-  (all except the cross-chain part of Q7, which is out of scope)
 - The literature: the gap (no tool combines several signals with proper
   testing) became the main requirement
 
@@ -544,3 +542,18 @@ proposal was missing:
 - **To check:** the W2 supervisor-meeting table says the final report is due
   15 Apr and the viva is 19 Apr-4 May, but the module handbook says 22 Apr
   and 29 Apr-14 May. Checking which is right before the final PP.
+
+## 23 Oct 2026 - Supervisor: Q7 through BigQuery
+
+My supervisor said I can use BigQuery instead of DefiLlama for Q7, so it's
+back in full scope:
+
+- **Cross-exchange:** transfers between exchange wallets, from the same
+  labelled exchange addresses as the exchange-flow signal.
+- **Cross-chain:** Ethereum transfers into and out of bridge contracts, plus
+  WBTC mints and burns for Bitcoin moving onto Ethereum. All of this is in the
+  BigQuery Ethereum tables, so no new source is needed.
+- These flows are collected under Objective 2 and shown on the dashboard.
+  They aren't a fifth tested signal, so the Holm counts stay 16, 64 and 4.
+- Updated the README, the scope, data and methodology slides, and removed
+  the "out of scope" notes from 22 Oct.
