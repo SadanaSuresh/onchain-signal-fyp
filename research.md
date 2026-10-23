@@ -523,3 +523,24 @@ that didn't match. What I changed:
 - Added the new ethics rule: the declaration must be accepted by IPD.
 - Made the reference list consistent (full stops after italic titles, one
   preprint format, Journal of Business & Economic Statistics).
+
+## 23 Oct 2026 - Checked the proposal against the module lectures
+
+Went through the W2, W3, W5 and requirements lectures and added what the
+proposal was missing:
+
+- **Risk scoring (W3):** each phase risk now has probability x impact
+  (1-5 each): 15+ high, 6-14 medium, under 6 low. Highest are Arkham
+  labels, report-writing and hard statistics questions (all 12, medium).
+- **Skills (W3 PP checklist):** existing are Python, SQL, Git and Flask. To
+  learn: BigQuery, The Graph queries, time-series testing (Diebold-Mariano,
+  Newey-West) and Streamlit.
+- **Named UK laws (W5):** API access only as approved (Computer Misuse Act
+  1990), no republishing data (Copyright, Designs and Patents Act 1988), and
+  under UK GDPR / Data Protection Act 2018 wallet addresses may count as
+  "online identifiers", so only public entity labels are used.
+- **Storage:** data backed up to University OneDrive, as the ethics lecture
+  recommends.
+- **To check:** the W2 supervisor-meeting table says the final report is due
+  15 Apr and the viva is 19 Apr-4 May, but the module handbook says 22 Apr
+  and 29 Apr-14 May. Checking which is right before the final PP.
