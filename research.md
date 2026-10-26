@@ -96,7 +96,9 @@ price movement and volatility beyond what market data shows.
    liquidity) using BigQuery, exchange wallet labels and The Graph. (Q2-Q8; Q7 through BigQuery,
    see 23 Oct)
 3. By 8 Jan 2027: anomaly detection with rolling z-scores per wallet/token
-   instead of one fixed threshold. (Q9)
+   instead of one fixed threshold, flagging transfers over 2 SD. It passes
+   if, in the test weeks, flagged hours are followed by bigger price moves
+   than other hours (Mann-Whitney U, Holm over 2 tests: BTC and ETH). (Q9)
 4. By 21 Jan 2027: compare a market-only model (the target's own last 24
    hours plus the last 24 hours of trading volume) against the same model
    plus each signal, on a walk-forward split. It passes if out-of-sample
@@ -113,7 +115,7 @@ price movement and volatility beyond what market data shows.
    weights), tested against the best single signal out-of-sample with
    Diebold-Mariano after Holm correction (4 tests: 2 coins x 2 targets).
    (Q13)
-7. By 10 Mar 2027: walk-forward validation across objectives 4-6 so I'm
+7. By 10 Mar 2027: walk-forward validation across objectives 3-6 so I'm
    not fooled by overfitting or by running lots of tests. (Q14)
 
 **Scope:**
@@ -557,3 +559,32 @@ back in full scope:
   They aren't a fifth tested signal, so the Holm counts stay 16, 64 and 4.
 - Updated the README, the scope, data and methodology slides, and removed
   the "out of scope" notes from 22 Oct.
+
+## 26 Oct 2026 - Closing three design gaps
+
+- **Objective 3 test:** "flags transfers over 2 SD" was true by definition, so
+  it didn't test anything. Now it passes only if flagged hours are followed by
+  bigger price moves than other hours in the test weeks, checked with a
+  Mann-Whitney U test (Mann and Whitney, 1947), which suits fat-tailed crypto
+  returns. Holm over 2 tests (BTC and ETH). Holm groups are now 2, 16, 64
+  and 4.
+- **30-minute lead-lag window:** the hourly timing rule doesn't fit a
+  30-minute window, so for lead-lag each window starts at the first 5-minute
+  price bar after the block's timestamp. The hourly rule stays for the
+  forecast tests in Objective 4.
+- **Signals for Bitcoin:** stablecoin flows are one market-wide series used
+  for both BTC and ETH, and DEX liquidity for BTC comes from WBTC pools on
+  Uniswap.
+- **Series count:** with one market-wide stablecoin series, Objective 2 has
+  7 series (exchange flows, whale transfers and DEX liquidity for each coin,
+  plus stablecoins), not 8. The Holm counts don't change, because the
+  stablecoin series is still tested against both coins.
+- **Other fixes from a full check against the mark scheme:** the problem slide
+  now names the deeper problem (platforms sell on-chain alerts without
+  published out-of-sample tests); the literature slide links sources
+  (stablecoins have the most support across studies, so they're the signal
+  most likely to pass; exchange labels use the same clustering that Kang et
+  al. show can de-anonymise users); the tools slide compares Alchemy, and
+  PostgreSQL and Firestore, more critically; Objective 7 now covers
+  objectives 3-6; the Q7 flows are on the pipeline and dashboard slides; and
+  the three UK Acts are in the reference list (28 sources).
