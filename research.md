@@ -588,3 +588,18 @@ back in full scope:
   PostgreSQL and Firestore, more critically; Objective 7 now covers
   objectives 3-6; the Q7 flows are on the pipeline and dashboard slides; and
   the three UK Acts are in the reference list (28 sources).
+
+## 26 Oct 2026 - Supervisor: rules for the Q7 flows
+
+My supervisor confirmed that collecting the Q7 flows and showing them on the
+dashboard doesn't add a test, so the signal families stay at 16, 64 and 4.
+The separate group of 2 is the Objective 3 anomaly check. Two rules keep that
+true, now on the test design and dashboard slides:
+
+- The exchange labels and the bridge-contract list are fixed before I look
+  at any prices.
+- The flows stay out of the composite and are never shown next to a p-value.
+  On the dashboard they describe where coins moved; they aren't a fifth
+  forecast.
+
+We're going through the ethics declaration on Teams on Friday 30 Oct at 11am.
